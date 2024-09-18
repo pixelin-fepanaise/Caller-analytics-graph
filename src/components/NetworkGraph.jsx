@@ -6,13 +6,14 @@ import "./NetworkGraph.css";
 const NetworkGraph = ({ selectedCommunity }) => {
   const [nodesData, setNodesData] = useState(null);
   const [relationshipsData, setRelationshipsData] = useState(null);
-  // const graphCacheRef = useRef({});
+  const [isLoading, setIsLoading] = useState(false); // Loading state
   const graphRef = useRef();
   const simulationRef = useRef();
 
   // Fetch and store all data when the component mounts
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true); // Start loading
       try {
         const nodesResponse = await fetch(
           "https://cdwa5g3mxi.execute-api.us-east-1.amazonaws.com/large-node/get-cdr-data-nodes-api"
@@ -29,6 +30,8 @@ const NetworkGraph = ({ selectedCommunity }) => {
         setRelationshipsData(relationshipsData);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false); // Stop loading after data is fetched
       }
     };
 
@@ -36,7 +39,6 @@ const NetworkGraph = ({ selectedCommunity }) => {
   }, []);
 
   // Render or update the graph when selectedCommunity changes
-
   useEffect(() => {
     if (selectedCommunity && nodesData && relationshipsData) {
       // Extract community-specific data
@@ -62,7 +64,9 @@ const NetworkGraph = ({ selectedCommunity }) => {
 
   return (
     <div ref={graphRef} className="network-graph-container">
-      {/* Container for the graph */}
+      {/* Display text based on the state */}
+      {!selectedCommunity && <p>Select a community to view graph.</p>}
+      {selectedCommunity && isLoading && <p>Graph loading, please wait.</p>}
     </div>
   );
 };
