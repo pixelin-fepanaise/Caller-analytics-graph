@@ -1,0 +1,17 @@
+version: "3.8" # Specifies the Compose file format
+
+services:
+  web:
+    build:
+      context: . # Refers to the current directory
+      dockerfile: Dockerfile # Points to the Dockerfile in the current directory
+    ports:
+      - "5173:5173" # Maps port 5173 in the container to 5173 on the host machine
+    volumes:
+      - .:/app # Mounts the current directory to /app in the container
+      - /app/node_modules # Prevents overwriting node_modules in the container
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true # Keeps stdin open (useful for interactive apps)
+    tty: true # Adds a TTY for debugging
+    command: npm run dev # Runs the Vite development server
