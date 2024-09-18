@@ -1,0 +1,101 @@
+/* Dropdown container */
+.container {
+  width: 100%;
+  max-width: 15.625rem; /* 250px to 15.625rem */
+}
+
+/* Dropdown */
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+  max-width: 15.625rem; /* 250px to 15.625rem */
+  min-width: 12.5rem; /* 200px to 12.5rem */
+  height: 2.8125rem; /* 45px to 2.8125rem */
+  border: 0.0625rem solid var(--dropdown-border-color); /* 1px to 0.0625rem */
+  border-radius: 0.25rem; /* 4px to 0.25rem */
+  background-color: var(--white-one);
+  cursor: pointer;
+  padding: 0.625rem; /* 10px to 0.625rem */
+}
+
+/* Dropdown header */
+.selected-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-arrow {
+  width: 0;
+  height: 0;
+  border-left: 0.3125rem solid transparent; /* 5px to 0.3125rem */
+  border-right: 0.3125rem solid transparent; /* 5px to 0.3125rem */
+  border-top: 0.375rem solid var(--dropdown-arrow-color); /* 6px to 0.375rem */
+}
+
+.loading {
+  text-align: center;
+  font-size: 1rem; /* 16px to 1rem */
+  color: var(--loading-text-color);
+  padding: 1.25rem; /* 20px to 1.25rem */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 10;
+}
+
+/* Dropdown options */
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 0.0625rem solid var(--dropdown-border-color); /* 1px to 0.0625rem */
+  background-color: var(--white-one);
+  z-index: 1;
+  height: calc(100vh - 18.25rem); /* 292px to 18.25rem */
+  min-height: 18.75rem; /* 300px to 18.75rem */
+  max-height: 37.5rem; /* 600px to 37.5rem */
+  overflow-y: auto;
+}
+
+/* Option styling */
+.option {
+  padding: 0.625rem; /* 10px to 0.625rem */
+  border-bottom: 0.0625rem solid var(--dropdown-border-color); /* 1px to 0.0625rem */
+}
+
+.option div {
+  cursor: pointer;
+  margin-bottom: 0.3125rem; /* 5px to 0.3125rem */
+}
+
+.option-text {
+  font-size: 1rem; /* 16px to 1rem */
+}
+
+.option-button {
+  padding: 0.3125rem 0.625rem; /* 5px 10px to 0.3125rem 0.625rem */
+  font-size: 0.875rem; /* 14px to 0.875rem */
+  font-weight: 500;
+  color: var(--white-one);
+  border: none;
+  background-color: var(--green-two);
+  border-radius: 0.25rem; /* 4px to 0.25rem */
+  cursor: pointer;
+  width: 6.25rem; /* 100px to 6.25rem */
+}
+
+.option-button:hover {
+  font-weight: 600;
+}
+
+.option:last-child {
+  border-bottom: none;
+}
+
+.option.selected {
+  background-color: var(--green-three);
+}

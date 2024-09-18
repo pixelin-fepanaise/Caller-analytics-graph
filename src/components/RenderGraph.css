@@ -1,0 +1,23 @@
+.svg-container {
+  margin: auto;
+  width: calc(100vw - 19.375rem); /* 310px to 19.375rem */
+  height: calc(100vh - 190px); /* 273px to 17.0625rem36px*/
+}
+
+/* Apply the pointer cursor when hovering over the nodes */
+.nodes circle {
+  cursor: pointer;
+}
+
+/* Media Query for screen width 700px and below */
+@media (max-width: 995px) {
+  .svg-container {
+    height: calc(100vh - 210px); /* 273px to 17.0625rem36px*/
+  }
+}
+
+@media (max-width: 781px) {
+  .svg-container {
+    height: calc(100vh - 230px); /* 273px to 17.0625rem36px*/
+  }
+}
