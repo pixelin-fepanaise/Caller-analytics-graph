@@ -6,14 +6,13 @@ import "./NetworkGraph.css";
 const NetworkGraph = ({ selectedCommunity }) => {
   const [nodesData, setNodesData] = useState(null);
   const [relationshipsData, setRelationshipsData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isLoading, setIsLoading] = useState(false);
   const graphRef = useRef();
   const simulationRef = useRef();
 
-  // Fetch and store all data when the component mounts
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);
       try {
         const nodesResponse = await fetch(
           "https://cdwa5g3mxi.execute-api.us-east-1.amazonaws.com/large-node/get-cdr-data-nodes-api"
@@ -31,25 +30,22 @@ const NetworkGraph = ({ selectedCommunity }) => {
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
-        setIsLoading(false); // Stop loading after data is fetched
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  // Render or update the graph when selectedCommunity changes
   useEffect(() => {
     if (selectedCommunity && nodesData && relationshipsData) {
-      // Extract community-specific data
       const communityNodes = nodesData[selectedCommunity]?.nodes || [];
       const communityRelationships =
         relationshipsData[selectedCommunity]?.[selectedCommunity] || [];
 
-      // Format nodes and links
       const nodes = communityNodes.map((node) => ({
         id: node.id,
-        label: `Id: ${node.id}\nCity: ${node.city}`, // Id and City
+        label: `Id: ${node.id}\nCity: ${node.city}`,
       }));
 
       const links = communityRelationships.map((relation) => ({
@@ -57,16 +53,14 @@ const NetworkGraph = ({ selectedCommunity }) => {
         target: relation.to,
       }));
 
-      // Render the graph
       RenderGraph(nodes, links, graphRef, simulationRef);
     }
   }, [selectedCommunity, nodesData, relationshipsData]);
 
   return (
     <div ref={graphRef} className="network-graph-container">
-      {/* Display text based on the state */}
       {!selectedCommunity && <p>Select a community to view graph.</p>}
-      {selectedCommunity && isLoading && <p>Graph loading, please wait.</p>}
+      {selectedCommunity && isLoading && <div className="spinner"></div>}
     </div>
   );
 };
